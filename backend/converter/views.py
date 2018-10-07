@@ -6,7 +6,7 @@ from converter.converter import Convert
 class ConverterAPIView(APIView):
 
     def post(self, request):
-        number_to_convert = request.data['number']
+        number_to_convert = str(request.data['number'])
         converter = Convert(number_to_convert)
         result = {'data': converter.convert()}
         return JsonResponse(result)
