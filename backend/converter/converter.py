@@ -22,22 +22,22 @@ class Convert(object):
 
     def validate_number(self):
         if not self.number:
-            raise APIException(detail='data should be specified', code=self.default_error_code)
+            raise APIException(detail='Data should be specified', code=self.default_error_code)
         elif self.number.isdigit():
             if 0 <= int(self.number) <= 3999:
                 return int(self.number)
             else:
-                raise APIException(detail='number should be between 0 and 3999', code=self.default_error_code)
+                raise APIException(detail='Number should be between 0 and 3999', code=self.default_error_code)
         number_string = ''.join(self.number.split())
         for char in number_string:
             if char not in "IVXLCDM":
-                raise APIException(detail='enter a valid rome number', code=self.default_error_code)
+                raise APIException(detail='Enter a valid rome number', code=self.default_error_code)
             else:
                 res = re.fullmatch(r'^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$', number_string)
                 if res:
                     return res.string
                 else:
-                    raise APIException(detail='enter a valid rome number', code=self.default_error_code)
+                    raise APIException(detail='Enter a valid rome number', code=self.default_error_code)
 
     def rome_to_arab(self):
         string = self.number
